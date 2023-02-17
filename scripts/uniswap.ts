@@ -37,9 +37,13 @@ const holderBalance3 = await DaiContract.balanceOf(DAIHolder);
   const holderBalance4 = await UniContract.balanceOf(DAIHolder);
   console.log(`Dai balance after first ${holderBalance4}`);
 
-//addliquidityETH
-
-
+// addliquidityETH
+const approveAtETH = await DaiContract.connect(impersonatedSigner).approve(ROUTER, amountApprove)
+const ETHbalance = await ethers.provider.getBalance(DAIHolder)
+console.log(`ethbalance before ${ETHbalance}`)
+await Uniswap.connect(impersonatedSigner).addLiquidityETH(DAI, amountApprove, 0, 0, DAIHolder, deadline, {value : 100});
+const ETHbalances = await ethers.provider.getBalance(DAIHolder)
+console.log(`ethbalance after ${ETHbalances}`)
 
 //remove liquidity
 const Factory = await ethers.getContractAt("IUniswapV2Factory", FACTORY);
@@ -48,17 +52,14 @@ const paired = await ethers.getContractAt("IUniswapV2Pair", pair);
 console.log(paired.address);
 const liquidity = await paired.balanceOf(impersonatedSigner.address);
 console.log(liquidity);
-// const liq = BigNumber.from(liquidity);
-const liqcheck = await parseInt(String(liquidity));
-console.log(liqcheck);
-await paired.approve(ROUTER, liqcheck);
-await Uniswap.connect(impersonatedSigner).removeLiquidity(UNI, DAI, liqcheck, 0, 0, DAIHolder, deadline);
+const app = ethers.utils.parseEther("100")
+await paired.connect(impersonatedSigner).approve(ROUTER, app);
+await Uniswap.connect(impersonatedSigner).removeLiquidity(UNI, DAI, liquidity, 0, 0, DAIHolder, deadline);
 
-//
-// const holderBalance5 = await DaiContract.balanceOf(DAIHolder);
-//   console.log(`Dai balance after second ${holderBalance5}`);
-//   const holderBalance6 = await UniContract.balanceOf(DAIHolder);
-//   console.log(`Dai balance after second ${holderBalance6}`);
+const holderBalance5 = await DaiContract.balanceOf(DAIHolder);
+  console.log(`Dai balance after second ${holderBalance5}`);
+  const holderBalance6 = await UniContract.balanceOf(DAIHolder);
+  console.log(`Dai balance after second ${holderBalance6}`);
 
 
 }
