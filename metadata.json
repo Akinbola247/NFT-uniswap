@@ -1,0 +1,31 @@
+{ 
+  "description": "First NFT written and deployed to testnet",
+  "image": "https://ipfs.filebase.io/ipfs/QmV3shFS3D8EU11WDWuo6JUeXMnNnNLKPVtVGYNp1D3kKd",
+  "name": "KEN NFT", 
+  "attributes": [
+    {
+      "trait_type": "Wink", 
+      "value": "Lively"
+    }, 
+    {
+      "trait_type": "Eyes", 
+      "value": "Big"
+    }, 
+    {
+      "trait_type": "Mouth", 
+      "value": "wide"
+    }, 
+    {
+      "trait_type": "Level", 
+      "value": 5
+    }, 
+    {
+      "trait_type": "Stamina", 
+      "value": 1.4
+    }, 
+    {
+      "trait_type": "Personality", 
+      "value": "happy"
+    }
+    ]
+  }
